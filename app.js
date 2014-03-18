@@ -28,10 +28,12 @@ app.all('/*', function (req, res, next) {
   next();
 });
 
-//app.use("/", express.static(__dirname + '/public'));
-app.get('/', function(req, res) {
-    res.status(202).sendfile(__dirname + '/public/index.html');
+app.use(app.router);
+app.use(function(req, res) {
+    res.set('Content-Type', 'text/html'); 
+    // Use res.sendfile, as it streams instead of reading the file into memory.
+    res.sendfile(__dirname + '/public/index.html');
 });
-
-app.listen(8000);
+var port = process.env.PORT || 8000;
+app.listen(port);
 console.log('Listening on port 80');

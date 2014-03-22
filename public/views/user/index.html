@@ -1,0 +1,69 @@
+<style type="text/css">
+  .gridStyle {
+      border: 1px solid rgb(212,212,212);
+      width: 100%; 
+      height: 600px;      
+  }
+</style>
+
+<div class="ui grid">
+
+  <div class="column"></div>
+
+  <div class="fourteen wide column">
+  <h2 class="ui dividing header">
+    Usuarios <div ng-click="createUser()" class="circular ui blue small submit button"><i class="add sign icon"></i>Crate</div>  
+  </h2>
+  <div class="gridStyle ui table segment" ng-grid="gridOptions">
+    <div class="ui active dimmer">
+      <div class="ui text large loader">Loading</div>
+    </div>
+  </div>
+
+  <div class="column"></div>
+</div>
+
+
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    <span class="Action"></span> User
+  </div>
+  <div class="content">
+      <div class="ui fluid form segment">
+      <h3 class="ui header">Register User:</h3>
+      <div class="two fields">
+        <div class="field">
+          <label>First Name</label>
+          <input placeholder="First Name" ng-model="user.name" type="text" required autofocus/>
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input placeholder="Last Name" type="text" >
+        </div>
+      </div>
+      <div class="field">
+        <label>Email address</label>
+        <div class="ui labeled icon input">
+            <input placeholder="Email address" type="text" ng-model="user.email" required/>
+            <div class="ui corner label">
+              <i class="icon asterisk"></i>
+            </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="ui labeled icon input">
+            <input type="password" placeholder="Password" ng-model="user.password" />
+            <div class="ui corner label">
+                <i class="icon asterisk"></i>
+            </div>
+        </div>
+      </div>
+            
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui button negative"> Cancel</div>
+    <div ng-click="modalOK()" class="ui button positive" >OK</div>
+  </div></div>

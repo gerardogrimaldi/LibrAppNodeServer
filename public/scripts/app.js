@@ -14,7 +14,7 @@ var app = angular.module('LibrApp', [
       .when('/',              {templateUrl: 'views/main.html',          controller: 'MainCtrl'})
       .when('/navbar',        {templateUrl: 'views/navbar.html',        controller: 'MainCtrl'})
       .when('/users',         {templateUrl: 'views/user/index.html',    controller: 'IndexUserCtrl'})
-      .when('/user/login',    {templateUrl: 'views/user/login.html',    controller: 'IndexUserCtrl'})
+      .when('/user/login',    {templateUrl: 'views/user/login.html',    controller: 'LoginUserCtrl'})
       .when('/user/register', {templateUrl: 'views/user/create.html',   controller: 'IndexUserCtrl'})
       //.when('/user/create', {templateUrl: 'views/user/create.html', controller: 'UserCreateCtrl'})
       

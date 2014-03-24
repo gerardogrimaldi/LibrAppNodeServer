@@ -39,13 +39,22 @@ var userController = require('./controllers/userController.js');
 		});*/
 
 		// process the login form
-		app.post('/user/login', passport.authenticate('local-login', {
+		app.post('/user/login',	function(req, res, next) {
+			passport.authenticate('local-login', function(err, user, info) {
+			 	if (err) {
+			      return next(err); // will generate a 500 error
+			    }
+			    // Generate a JSON response reflecting authentication status
+			    if (! user) {
+			      return res.send({ success : false, message : 'authentication failed' });
+			    }
+			    return res.send({ success : true, message : 'authentication succeeded' });
+			  }(req, res, next));
+		});	
 			//successRedirect : '/profile', // redirect to the secure profile section
 			//failureRedirect : '/login', // redirect back to the signup page if there is an error
-			
-			failureRedirect :	res.json(404, { success : false, message : 'authentication failed' }),
-			failureFlash : true // allow flash messages
-		}));
+			//failureFlash : true // allow flash messages
+
 
 		// SIGNUP =================================
 		// show the signup form

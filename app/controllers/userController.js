@@ -1,10 +1,10 @@
-var user = require('../models/user.js'); 
+var user = require('../models/userModel.js');
 /*
  * Users Routes
  */
 
 exports.index = function(req, res) {
-  user.find({}, function(err, docs) {
+    user.find({}, function(err, docs) {
     if(!err) {
       res.json(200, docs );  
     } else {
@@ -15,7 +15,7 @@ exports.index = function(req, res) {
 
 exports.show = function(req, res) {
   var id = req.params.id; // The id of the User the user wants to look up. 
-  user.findById(id, function(err, doc) {
+    user.findById(id, function(err, doc) {
     if(!err && doc) {
       res.json(200, doc);
     } else if(err) {
@@ -33,7 +33,7 @@ exports.create = function(req, res) {
     //user.findOne({ name: name }, function(err, doc) {  // This line is case sensitive.
     user.findOne({ name: { $regex: new RegExp(name, "i") } }, function(err, doc) {  // Using RegEx - search is case insensitive
     if(!err && !doc) {
-      var newUser = new user(); 
+      var newUser = new user();
       newUser.name = name; 
       newUser.password = password; 
       newUser.email = email;

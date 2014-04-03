@@ -5,7 +5,7 @@ var TwitterStrategy  = require('passport-twitter').Strategy;
 var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
 // load up the user model
-var User       = require('../app/models/user');
+var User       = require('../app/models/userModel');
 
 // load the auth variables
 var configAuth = require('./auth'); // use this one for testing
@@ -89,10 +89,11 @@ module.exports = function(passport) {
                     } else {
 
                         // create the user
-                        var newUser            = new User();
-
-                        newUser.email    = email;
-                        newUser.password = newUser.generateHash(password);
+                        var newUser         = new User();
+                        newUser.firstName   = req.body.firstName;
+                        newUser.lastName    = req.body.lastName;
+                        newUser.email       = email;
+                        newUser.password    = newUser.generateHash(password);
 
                         newUser.save(function(err) {
                             if (err)

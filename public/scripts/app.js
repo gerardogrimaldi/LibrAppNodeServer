@@ -11,13 +11,11 @@ var app = angular.module('LibrApp', [
 ])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/',              {templateUrl: 'views/main.html',          controller: 'MainCtrl'})
-      .when('/navbar',        {templateUrl: 'views/navbar.html',        controller: 'MainCtrl'})
-      .when('/users',         {templateUrl: 'views/user/index.html',    controller: 'IndexUserCtrl'})
-      .when('/user/login',    {templateUrl: 'views/user/login.html',    controller: 'LoginUserCtrl'})
-      .when('/user/register', {templateUrl: 'views/user/create.html',   controller: 'IndexUserCtrl'})
-      //.when('/user/create', {templateUrl: 'views/user/create.html', controller: 'UserCreateCtrl'})
-      
+    .when('/',              {templateUrl: 'views/main.html',            controller: 'MainCtrl'})
+    .when('/users',         {templateUrl: 'views/user/index.html',      controller: 'IndexUserCtrl'})
+    .when('/user/login',    {templateUrl: 'views/user/login.html',      controller: 'LoginUserCtrl'})
+    .when('/user/register', {templateUrl: 'views/user/register.html',   controller: 'RegisterUserCtrl'})
+
       .otherwise({redirectTo: '/404'});
     //$locationProvider.html5Mode(true);
   }]);
@@ -32,8 +30,9 @@ app.config(['$httpProvider', function($httpProvider) {
 ]);
 
 app.config(function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('/api');
   //RestangularProvider.setBaseUrl('https://libraps-c9-gerardogrimaldi.c9.io/api');
-  RestangularProvider.setBaseUrl('http://api.gerardogrimaldi.com/api');
+  //RestangularProvider.setBaseUrl('http://api.gerardogrimaldi.com/api');
 
   RestangularProvider.setDefaultHttpFields({cache: true});
   //RestangularProvider.setMethodOverriders(["put", "patch"]);

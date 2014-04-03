@@ -11,6 +11,7 @@ var flash    = require('connect-flash');
 
 var configDB = require('./config/database.js');
 
+
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -22,10 +23,9 @@ app.configure(function() {
 	app.use(express.logger('dev')); // log every request to the console
 	app.use(express.cookieParser()); // read cookies (needed for auth)
 	app.use(express.bodyParser()); // get information from html forms
-	app.use(express.methodOverride());
+    app.use(express.static(__dirname + '/public'), { maxAge: 86400000 });
 
 	//app.set('view engine', 'ejs'); // set up ejs for templating
-  	app.use(express.static(__dirname + '/public'), { maxAge: 86400000 });
 
 	// required for passport
 	app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
@@ -37,16 +37,14 @@ app.configure(function() {
 
 // CORS header securiy
 app.all('/*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-  next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
+    next();
 });
-
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);
 console.log("Express server listening on port %s in %s mode.",  port, app.settings.env);
-

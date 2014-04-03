@@ -2,14 +2,15 @@
 
 angular.module('LibrApp').controller('IndexUserCtrl', function ($scope, $http, Restangular) {
     var baseUsers = Restangular.all('user');
+
     $scope.getUsers = function(){
         activeLoading();
         baseUsers.getList().then(function (users) {
             $scope.users = users;
-            disableLoading();
-        }, function errorCallback() {
-            alert("Oops error from server :(");
+        }, function errorCallback(response) {
+            toastr.error("Error" + " " + response.data.message + " " + response.status);
         });
+        disableLoading();
     };
     $scope.user = { };
     $scope.getUsers();
@@ -25,14 +26,14 @@ angular.module('LibrApp').controller('IndexUserCtrl', function ($scope, $http, R
                 $scope.user = { }    
                 $scope.getUsers();
             },  function errorCallback() {
-                alert("Oops error from server :(");
+                toastr.error("Error " + " Oops error from server :(" + " " + data.message + " " + status);
             });
         } else {
             $scope.user.put().then(function () {
                 $scope.getUsers();
                 $scope.user = { }    
             },  function errorCallback() {
-                alert("Oops error from server :(");
+                toastr.error("Error " + " Oops error from server :(" + " " + data.message + " " + status);
             });
         }
     }
@@ -40,13 +41,14 @@ angular.module('LibrApp').controller('IndexUserCtrl', function ($scope, $http, R
     $scope.gridOptions = { 
         data: 'users',
         columnDefs: [
-            {field:'name', displayName:'Name'}, 
+            {field:'firstName', displayName:'First Name'},
+            {field:'lastName', displayName:'Last Name'},
             {field:'email', displayName:'E-mail'},
             {displayName: 'Edit', cellTemplate: '<div id="editBtn" type="button" class="mini ui button"" ng-click="editUser(row.entity)" > <i class="edit sign icon"></i>Edit</div> '},
             {displayName: 'Delete', cellTemplate: '<div id="deleteBtn" type="button" class="mini ui button"" ng-click="deleteUser(row.entity)" ><i class="remove sign icon"></i>Delete</div> '}
         ],
         multiSelect: false,
-    }
+    };
     $scope.editUser = function(user) {
         $(".Action").text("Update");
         $scope.user = Restangular.copy(user);
@@ -57,12 +59,12 @@ angular.module('LibrApp').controller('IndexUserCtrl', function ($scope, $http, R
         activeLoading()
         var userToDelete = user;
         userToDelete.remove().then(function () {
-        $scope.users = _.without($scope.users, userToDelete);
-        disableLoading();
+            $scope.users = _.without($scope.users, userToDelete);
         }, function errorCallback() {
-            alert("Oops error from server :(");
+            toastr.error("Error " + " Oops error from server :(" + " " + data.message + " " + status);
+
         });;
-        disableLoading();        
+        disableLoading();
     };
 });
 

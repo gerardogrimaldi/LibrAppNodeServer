@@ -1,47 +1,49 @@
 <div class="ui three column grid">
-
-  <div class="column"></div>
-  
-  <div class=" column">
-      <h2 class="ui dividing header">
-        Please sign in
-      </h2>
-      
-      <div class="ui form segment" style="display: block;">
-        <div class="field">
-          <label>Email address</label>
-          <div class="ui left labeled icon input">
-            <input type="text"  ng-model="user.email" placeholder="Email address">
-            <i class="user icon"></i>
-            <div class="ui corner label">
-              <i class="icon asterisk"></i>
+    <div class="column"></div>
+    <div class="column">
+        <div class="ui floating message attached">
+            <div class="header">
+                Please Sign In
             </div>
-          </div>
+            <p>You need to bee sign in for view some content of the site.</p>
         </div>
-        <div class="field">
-          <label>Password</label>
-          <div class="ui left labeled icon input">
-            <input type="password" ng-model="user.password" placeholder="Password" required>
-            <i class="lock icon"></i>
-            <div class="ui corner label">
-              <i class="icon asterisk"></i>
+        <div class="ui floating form attached fluid message segment" style="display: block;">
+            <div class="field">
+                <label>Email address</label>
+                <div class="ui left labeled icon input">
+                    <input type="text"  ng-model="user.email" placeholder="Email address">
+                    <i class="user icon"></i>
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="field">
+                <label>Password</label>
+                <div class="ui left labeled icon input">
+                    <input type="password" ng-model="user.password" placeholder="Password" required>
+                    <i class="lock icon"></i>
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="inline field">
+                <div class="ui checkbox">
+                    <input type="checkbox">
+                    <label> Remember me <a href="#/user/create" >Not a user? Create One.</a></label>
+                </div>
+            </div>
+            <div class="ui error message">
+                <div class="header">We noticed some issues</div>
+            </div>
+            <div ng-click ="Login()" class="ui blue submit button">Sign in</div>
         </div>
+        <div class="ui floating bottom attached info message">
+            <i class="icon help"></i>Are you sure you know what you're doing?
+        </div>
+    </div>
 
-      <div class="inline field">
-        <div class="ui checkbox">
-          <input type="checkbox">
-          <label> Remember me <a href="#/user/create" >Not a user? Create One.</a></label>
-        </div>
-      </div>
-        <div class="ui error message">
-          <div class="header">We noticed some issues</div>
-        </div>
-        <div ng-click ="Login()" class="ui blue submit button">Sign in</div>
-      </div>
-  </div>
-    
-  <div class="column"></div>
-  
+    <div class="column"></div>
+
 </div>
